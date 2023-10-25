@@ -1,34 +1,24 @@
 package ru.netology.rest;
 
-import org.junit.jupiter.api. Test;
+import org.junit.jupiter.api.Test;
 
-
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-
-class PostmanEchoTest {
-
-
+public class PostmanEchoTest {
     @Test
-    void shouldReturnSendData () {
-        given() RequestSpecification
-                .baseUri ("https://postman-echo.com")
-                .body ("Hi")
-                .when ()
-                .post ( path: "/post") Response
-                .then () ValidatableResponse
-                . statusCode ( expectedStatusCode: 200)
-.body( path: "data", equalTo( operand : "Hi"));
-        @Test
-        public void testPostRequest() {
-            given()
-                    .baseUri("https://postman-echo.com%22/)
-                            .body("some data")
-                            .when()
-                            .post("/post")
-                            .then()
-                            .statusCode(200)
-                            .body("data", equalTo("some data"));
-        }
+    public void shouldTestTheBody(){
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("text/plain; charset=UTF-8")
+                .body("re") // отправляемые данные (заголовки и query можно выставлять аналогично)
+// Выполняемые действия
+                .when()
+                .post("/post")
+// Проверки
+                .then()
+                .statusCode(200)
+                .body("data",equalTo("re"))
+        ;
     }
+}
